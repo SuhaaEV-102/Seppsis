@@ -1,0 +1,6 @@
+
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train_scaled, y_train)
+
+with open("scaler.pkl", "wb") as f:
+    pickle.dump(scaler, f)
