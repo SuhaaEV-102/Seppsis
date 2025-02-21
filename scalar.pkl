@@ -1,3 +1,12 @@
+import streamlit as st
+import pandas as pd
+import pickle
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train_scaled, y_train)
 
 rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 rf_model.fit(X_train_scaled, y_train)
