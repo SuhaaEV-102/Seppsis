@@ -25,7 +25,7 @@ for feature in feature_names:
     elif feature in ["PRG", "PL", "PR", "SK", "TS", "M11", "BD2"]:
         value = st.slider(f"Enter {feature}", min_value=0.0, max_value=200.0, value=50.0)
     else:
-        value = st.number_input(f"Enter {feature}", value=0.0)
+        value = st.number_input(f"Enter {feature}", value=0)
     user_input.append(value)
 
 # Optional file upload for automatic input
