@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+            background-image: url('result.jpg'); /* Background Image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.9); /* Slight Transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            height: 50px; /* Adjust logo size */
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .home-btn {
+            background-color: #28a745;
+        }
+        .home-btn:hover {
+            background-color: #218838;
+        }
+        .download-btn {
+            background-color: #007bff;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        .result-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="lo.webp" alt="Sepsis Foresee Logo" class="logo">
+            <div class="button-container">
+                <button class="btn download-btn" onclick="downloadPDF()">Download as PDF</button>
+                <button class="btn home-btn" onclick="goHome()">Home</button>
+            </div>
+        </div>
+        <hr>
+        <h3>Name: <span id="displayName"></span></h3>
+        <h3>Age: <span id="displayAge"></span></h3>
+        <h3>Gender: <span id="displayGender"></span></h3>
+        
+        <div class="result-box">
+            <h3>RESULT: <span id="predictionResult" style="color: green;">PENDING</span></h3>
+            <h3>CONFIDENCE: <span id="confidenceScore">-</span></h3>
+        </div>
+        
+        <h2>Prediction Results</h2>
+        <p>The model predicts the likelihood of sepsis based on vital signs. Below are the values:</p>
+        
+        <table>
+            <tr>
+                <th>Vital Sign</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Heart Rate</td>
+                <td id="displayHeartRate"></td>
+            </tr>
+            <tr>
+                <td>Respiratory Rate</td>
+                <td id="displayRespiratoryRate"></td>
+            </tr>
+            <tr>
+                <td>Temperature</td>
+                <td id="displayTemperature"></td>
+            </tr>
+            <tr>
+                <td>Diastolic Blood Pressure</td>
+                <td id="displayDBP"></td>
+            </tr>
+            <tr>
+                <td>Systolic Blood Pressure</td>
+                <td id="displaySBP"></td>
+            </tr>
+            <tr>
+                <td>Mean Arterial Pressure</td>
+                <td id="displayMAP"></td>
+            </tr>
+            <tr>
+                <td>Oxygen Saturation</td>
+                <td id="displayO2Sat"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch stored data
+            const storedData = JSON.parse(localStorage.getItem("sepsisData"));
+
+            if (storedData) {
+                // Display user details
+                document.getElementById("displayName").innerText = storedData.name;
+                document.getElementById("displayAge").innerText = storedData.age;
+                document.getElementById("displayGender").innerText = storedData.gender;
+                document.getElementById("displayTemperature").innerText = storedData.temperature;
+                document.getElementById("displayHeartRate").innerText = storedData.heartRate;
+                document.getElementById("displayRespiratoryRate").innerText = storedData.respiratoryRate;
+                document.getElementById("displayO2Sat").innerText = storedData.o2sat;
+                document.getElementById("displaySBP").innerText = storedData.sbp;
+                document.getElementById("displayDBP").innerText = storedData.dbp;
+                document.getElementById("displayMAP").innerText = storedData.map;
+
+                // Sepsis Prediction Logic
+                let confidence = 0;
+
+                if (storedData.heartRate > 100) confidence += 20;
+                if (storedData.respiratoryRate > 22 || storedData.respiratoryRate < 12) confidence += 15;
+                if (storedData.temperature > 38 || storedData.temperature < 36) confidence += 15;
+                if (storedData.o2sat < 92) confidence += 15;
+                if (storedData.sbp > 140 || storedData.sbp < 90) confidence += 10;
+                if (storedData.dbp > 90 || storedData.dbp < 60) confidence += 10;
+                if (storedData.map > 110 || storedData.map < 65) confidence += 10;
+
+                const isPositive = confidence >= 30;
+
+                // Update UI with prediction result
+                document.getElementById("predictionResult").innerText = isPositive ? "POSITIVE" : "NEGATIVE";
+                document.getElementById("predictionResult").style.color = isPositive ? "red" : "green";
+                document.getElementById("confidenceScore").innerText = confidence + "%";
+            }
+        });
+
+        // Function to go back to the home page
+        function goHome() {
+            window.location.href = "index.html"; // Update with your actual home page file name
+        }
+
+        // Function to download results as PDF
+        function downloadPDF() {
+            window.print();
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Sepsis Foresee</title>
+    <link rel="stylesheet" href="about.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(to right, #1a1a2e, #16213e);
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url("https://source.unsplash.com/1600x900/?healthcare,technology") center/cover no-repeat;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #f1c40f;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* About Container */
+        .about-container {
+            width: 80%;
+            margin: auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            color: #f1c40f;
+            margin-bottom: 15px;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-box h3 {
+            color: #f1c40f;
+        }
+
+        .feature-box p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            margin-top: 20px;
+        }
+
+        .back-home a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Sepsis Foresee</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="signup.html">Signup</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="prediction.html">Prediction</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>About <span>Sepsis Foresee</span></h1>
+            <p>Your AI-powered solution for early sepsis detection.</p>
+        </div>
+    </section>
+
+    <section class="about-container">
+        <div class="content">
+            <h2>Why Sepsis Foresee?</h2>
+            <p>Sepsis Foresee is an AI-based platform designed to predict sepsis at an early stage, providing life-saving insights.</p>
+            
+            <div class="features">
+                <div class="feature-box">
+                    <h3> Early Detection</h3>
+                    <p>Quick and accurate predictions to help doctors take immediate action.</p>
+                </div>
+                <div class="feature-box">
+                    <h3> AI-Powered Analysis</h3>
+                    <p>Advanced machine learning algorithms ensure precision and reliability.</p>
+                </div>
+                <div class="feature-box">
+                    <h3> Easy to Use</h3>
+                    <p>User-friendly interface with a seamless experience.</p>
+                </div>
+            </div>
+
+            <h2>Our Mission</h2>
+            <p>We strive to reduce sepsis-related deaths by providing a powerful and efficient AI-driven detection tool for healthcare professionals.</p>
+
+            <div class="back-home">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
